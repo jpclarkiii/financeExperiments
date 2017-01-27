@@ -3,3 +3,5 @@ include/
 lib/
 local/
 pip-selfcheck.json
+.ipynb_checkpoints/
+env/
