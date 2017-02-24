@@ -1,12 +1,17 @@
+import os
+
 class ExchangeReader(object):
     def __init__(self, debug=False):
         FDIR=os.getenv('FDIR')
         assert FDIR is not None
 
-        dataDir = "/".join([FDIR, data])
+        dataDir = "/".join([FDIR, "data"])
 
         self.exchanges = {'NASDAQ':None, 'NYSE':None, 'AMEX':None}
         self.exchangeFNs = {'NASDAQ':"/".join([dataDir, "NASDAQCompleteCompanyList.csv"]), 
+                            'NYSE':"/".join([dataDir, "NYSECompleteCompanyList.csv"]), 
+                            'AMEX':"/".join([dataDir, "AMEXCompleteCompanyList.csv"])}
+        self.exchangeURLs = {'NASDAQ':"http://www.nasdaq.com/screening/companies-by-industry.aspx?exchange=NASDAQ&render=download"
                             'NYSE':"/".join([dataDir, "NYSECompleteCompanyList.csv"]), 
                             'AMEX':"/".join([dataDir, "AMEXCompleteCompanyList.csv"])}
 
@@ -27,3 +32,7 @@ class ExchangeReader(object):
     def iterAllCompanies(self, fun):
         for exchangeName in self.exchanges:
             yield self.iterExchangeCompanies(exchangeName, fun)
+
+    def downloadExchangeCompanyList(self, exchangeName):
+        
+    def downloadAllExchangeCompanyLists(self):
